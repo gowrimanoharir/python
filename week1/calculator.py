@@ -84,18 +84,19 @@ import random
 
 # # While
 
-world = ""
-for x in range(11):
-    for y in range(11):
-        i = random.randint(0,1)
-        if(i==1):
-            c = 'X'
-        else:
-            c = 'o'
-        world = world+c
-    world = world + '\n'
+def generateWorld():
+    world = []
+    for x in range(11):
+        for y in range(11):
+            i = random.randint(0,1)
+            if(i==1):
+                c = 'X'
+            else:
+                c = 'o'
+            world[x][y] = c
+    return world
 
-print(world)
+print(generateWorld())
 
 marvel = ['Stark', 'Captain', 'Groot', 'Star Lord']
 for m in marvel:
