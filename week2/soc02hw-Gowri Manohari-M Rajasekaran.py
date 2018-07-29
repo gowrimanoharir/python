@@ -272,3 +272,19 @@ print('\nReview the students that were created:\n')
 for i in range(len(students)):
     print('\nStudent '+str(i+1)+':\n')
     students[i].self_print()
+
+
+# Day 4 Exercise
+print("""
+Day 4 - Exercises
+-----------------
+""") 
+
+#Compare the lexical diversity scores for humor and romance fiction in 1.1. Which genre is more lexically diverse?
+humor = 0.231
+romance = 0.121
+
+if(humor > romance):
+    print("Humor is more lexically diverse than Romance")
+else:
+    print("Romance is more lexically diverse than Hummor")    
