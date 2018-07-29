@@ -1,29 +1,36 @@
 import random
-# # Day 1 Exercise
-# print("""
-# Day 1 - Exercises
-# -----------------
-# Alice in the Wonderland - alpha frequency distribution table
-# """)
+import inspect
+# Day 1 Exercise
+print("""
+Day 1 - Exercises
+-----------------
+Alice in the Wonderland - alpha frequency distribution table
+""")
 
+filename = "alice_in_wonderland.txt"
+file = open(filename, "r")
 
-# filename = "alice_in_wonderland.txt"
-# file = open(filename, "r")
+fileContent = file.read().lower()
+alpha = 'abcdefghijklmnopqrstuvwxyz'
+frequency = []
 
-# fileContent = file.read().lower()
-# alpha = 'abcdefghijklmnopqrstuvwxyz'
-# frequency = {}
+for i in range(len(alpha)):
+    frequency.append([alpha[i], 0])
 
-# for i in range(len(alpha)):
-#     frequency[alpha[i]]=0
+for c in range(len(fileContent)):    
+    curChar = fileContent[c:c+1]
+    if(curChar.isalpha()):
+        for i in range(len(frequency)):
+            if(frequency[i][0]==curChar):
+                frequency[i][1] = frequency[i][1]+1
+                break
 
-# for c in range(len(fileContent)):    
-#     curChar = fileContent[c:c+1]
-#     if(curChar.isalpha()):
-#         frequency[curChar] = frequency[curChar]+1
+print("\nFrequency as List of lists: ", frequency)                
 
-# for i in frequency.keys():
-#     print(i+': '+str(frequency[i]))
+print("\nFrequency in required format:\n") 
+for i in range(len(frequency)):
+    print(frequency[i][0]+': '+str(frequency[i][1]))
+
 
 # Day 2 Exercise
 print("""
@@ -133,3 +140,135 @@ newWorld = generateWorld()
 print('\nNew World:\n')
 for i in range(len(newWorld)):
     print('\n', newWorld[i])
+
+# Day 3 Exercise
+print("""
+Day 3 - Exercises
+-----------------
+""")   
+
+# Modify "a" for another name in my_dict. Hint: you will have to create a new key-value pair, copy in the value, and then delete the old one.
+
+my_dict = {
+    "a": 35000,
+    "b": 8000,
+    "z": 450
+}    
+
+print("\nMy dict before rename of a: ", my_dict)
+
+my_dict["new"] = my_dict["a"]
+del(my_dict["a"])
+
+print("\nMy dict after rename of a to new: ", my_dict)
+
+# Redo the frequency distribution of alice_in_wonderland.txt and save your result in a dictionary.
+
+filename = "alice_in_wonderland.txt"
+file = open(filename, "r")
+
+fileContent = file.read().lower()
+alpha = 'abcdefghijklmnopqrstuvwxyz'
+frequency = {}
+
+for i in range(len(alpha)):
+    frequency[alpha[i]]=0
+
+for c in range(len(fileContent)):    
+    curChar = fileContent[c:c+1]
+    if(curChar.isalpha()):
+        frequency[curChar] = frequency[curChar]+1
+
+print("\nFrequency as dictionary: ", frequency)     
+
+print("\nFrequency in required format:\n")  
+for i in frequency.keys():
+    print(i+': '+str(frequency[i]))
+
+# Create a dictionary with your own personal details, feel free to be creative and funny so for example, you could include key-value pairs with quirky fact, fav quote, pet. Practice adding, modifying, accesing.    
+my_faves = dict(name = "Gowri", superhero = "Iron Man, Wonder Woman", food = "dosa")
+
+print("\nMy favorites: ", my_faves)
+
+my_faves["iluv"] = "Travel"
+
+print("\nMy favorites after addition: ", my_faves)
+
+my_faves["iluv"] = "Travel, Procedurals"
+
+print("\nMy favorites after modification: ", my_faves)
+
+del(my_faves["superhero"])
+
+print("\nMy favorites after deletion: ", my_faves)
+
+# Review the chat reply of today's beautiful class interaction and instantiate a student variable for everyone who shared their dream.
+
+class Student():
+    def __init__(self, name, discord_id, fav_food, dream):
+        self.name = name
+        self.discord_id = discord_id
+        self.fav_food = fav_food
+        self.dream = dream
+
+    def my_print(self):
+        print(self.name+" "+self.discord_id+" "+self.fav_food+" "+self.dream)
+
+    def self_print(self):
+        for attr, value in self.__dict__.items():
+            print(attr+": "+value)
+
+s1 = Student("Gowri Rajasekaran", "gowri", "Dosa", "World with Liv & Let Liv")         
+s2 = Student("Bituin Callanta", "bituin [gold]", "sashimi", "Lessen the gender wage gap")   
+s3 = Student("Andreea Visanoiu", "andreea", "wontonmee", "becoming an University teacher")   
+s4 = Student("Jessica", "Jessi_RS [Gold]", "pasta", "work as developer by end of the year")   
+
+print("\nStudent Group:\n")
+s1.my_print()
+s2.my_print()
+s3.my_print()
+s4.my_print()
+
+s1.fav_food = "Enchiladas"
+del s1.discord_id
+
+print("\nS1 after modification & deletion:\n")
+s1.self_print()
+
+#Translate the real world 1MWTT student into a Student class, decide on all the attributes that would be meaningful.
+
+print('\nCreate Student class\n')
+
+class StudentClass():
+    def __init__(self, firstname="", lastname="", email="", phoneNum="", country="", genderIdentity="", codingLevel=""):
+        self.firstname = firstname
+        self.lastname = lastname
+        self.email = email
+        self.phoneNum = phoneNum
+        self.country = country
+        self.genderIdentity = genderIdentity
+        self.codingLevel = codingLevel
+
+    def self_print(self):
+        for attr, value in self.__dict__.items():
+            print(attr+": "+value)
+
+args = inspect.getfullargspec(StudentClass.__init__).args
+
+
+addMore = True
+students = []
+
+while(addMore):
+    s=[]
+    for i in range(1, len(args)):
+        s.append(input('Enter student\'s '+args[i]+': '))
+    students.append(StudentClass(*s))
+    more = input("\nDo you want to add more students? y/n: ") 
+    addMore = more == ('y' or 'Y')
+
+print('\nReview the students that were created:\n')
+
+for i in range(len(students)):
+    print('\nStudent '+str(i+1)+':\n')
+    students[i].self_print()
